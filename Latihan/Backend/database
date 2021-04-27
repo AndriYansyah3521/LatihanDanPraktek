@@ -1,0 +1,31 @@
+/*
+PostgreSQL Backup
+Database: postgres/public
+Backup Time: 2021-04-21 16:06:54
+*/
+
+DROP SEQUENCE IF EXISTS "public"."daftarsiswa_id_seq";
+DROP TABLE IF EXISTS "public"."daftarsiswa";
+CREATE SEQUENCE "daftarsiswa_id_seq" 
+INCREMENT 1
+MINVALUE  9
+MAXVALUE 9223372036854775807
+START 9
+CACHE 1;
+CREATE TABLE "daftarsiswa" (
+  "id" int8 NOT NULL DEFAULT nextval('daftarsiswa_id_seq'::regclass),
+  "nama" varchar(75) COLLATE "pg_catalog"."default" NOT NULL,
+  "keterangan" text COLLATE "pg_catalog"."default" NOT NULL
+)
+;
+ALTER TABLE "daftarsiswa" OWNER TO "postgres";
+BEGIN;
+LOCK TABLE "public"."daftarsiswa" IN SHARE MODE;
+DELETE FROM "public"."daftarsiswa";
+INSERT INTO "public"."daftarsiswa" ("id","nama","keterangan") VALUES (1, 'gitar', 'keterangan gitar'),(2, 'piano', 'keterangan piano'),(3, 'biola', 'keterangan biola'),(9, 'andri', 'yansyah'),(10, 'andri', 'yanssyh'),(11, 'andri', 'yansyah'),(12, 'yuli', 'tamara'),(13, 'gitar', 'keterangan gitar'),(14, 'andri', 'yansyah'),(15, 'andri', 'yansyah'),(16, 'andri', 'ganteng'),(17, 'andri', 'yansyah'),(18, 'yansyah', 'andri'),(19, 'kang gani ', 'baik'),(20, 'fitria', 'baik'),(21, 'andri', 'kang gan');
+COMMIT;
+ALTER TABLE "daftarsiswa" ADD CONSTRAINT "daftarsiswa_pkey" PRIMARY KEY ("id");
+ALTER SEQUENCE "daftarsiswa_id_seq"
+OWNED BY "daftarsiswa"."id";
+SELECT setval('"daftarsiswa_id_seq"', 23, true);
+ALTER SEQUENCE "daftarsiswa_id_seq" OWNER TO "postgres";

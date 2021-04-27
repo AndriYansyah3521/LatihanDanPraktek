@@ -1,0 +1,33 @@
+/*
+PostgreSQL Backup
+Database: tabeldata/public
+Backup Time: 2021-04-21 16:11:28
+*/
+
+DROP SEQUENCE IF EXISTS "public"."tabeldata_id_seq";
+DROP TABLE IF EXISTS "public"."tabeldata";
+CREATE SEQUENCE "tabeldata_id_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 9223372036854775807
+START 1
+CACHE 1;
+CREATE TABLE "tabeldata" (
+  "id" int8 NOT NULL DEFAULT nextval('tabeldata_id_seq'::regclass),
+  "nama" varchar(75) COLLATE "pg_catalog"."default" NOT NULL,
+  "alamat" varchar(75) COLLATE "pg_catalog"."default" NOT NULL,
+  "kota" varchar(75) COLLATE "pg_catalog"."default" NOT NULL,
+  "pendapatan" numeric(75,0) NOT NULL
+)
+;
+ALTER TABLE "tabeldata" OWNER TO "postgres";
+BEGIN;
+LOCK TABLE "public"."tabeldata" IN SHARE MODE;
+DELETE FROM "public"."tabeldata";
+INSERT INTO "public"."tabeldata" ("id","nama","alamat","kota","pendapatan") VALUES (1, 'andri', 'kopo', 'bandung', 50000),(2, 'tiara', 'puspita', 'bandung', 1500000),(3, 'kang ganu', 'jauh', 'garut', 15550000);
+COMMIT;
+ALTER TABLE "tabeldata" ADD CONSTRAINT "tabeldata_pkey" PRIMARY KEY ("id");
+ALTER SEQUENCE "tabeldata_id_seq"
+OWNED BY "tabeldata"."id";
+SELECT setval('"tabeldata_id_seq"', 4, true);
+ALTER SEQUENCE "tabeldata_id_seq" OWNER TO "postgres";

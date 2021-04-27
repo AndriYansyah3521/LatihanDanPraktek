@@ -1,0 +1,23 @@
+<br>
+<button class="btn btn-info" routerLink="/utama">Add</button>
+<br>
+<br>
+<form [formGroup]="cariDataForm" method="POST">
+    <table>
+        <tr>
+            <td><label for="nama">Cari Data</label></td>
+            <td><input type="text" formControlName="nama" placeholder="nama..">
+            </td>
+        </tr>
+        <tr>
+            <td><label for="alamat">Cari Data</label></td>
+            <td><input type="text" formControlName="alamat" placeholder="alamat..">
+            </td>
+        </tr>
+    </table>
+    <button type="submit" (click)=" cariData()" class="btn btn-secondary">Cari
+        Data</button>
+</form>
+<br>
+<table [dtOptions]="dtOptions" datatable class="table">
+</table>

@@ -1,0 +1,18 @@
+<form [formGroup]= "addDataForm"method="POST">
+    <table>
+        <tr>
+            <td><label for="nama">Nama </label></td>
+            <td><label for="nama"> : </label></td>
+            <td><input type="text" formControlName="nama" placeholder="nama..">
+            </td>
+
+        </tr>
+        <tr>
+            <td><label for="keterangan">Keterangan </label></td>
+            <td><label for="keterangan"> : </label></td>
+            <td><input type="text" formControlName="keterangan" placeholder="keterangan..">
+            </td>
+        </tr>
+        <button class="btn btn-secondary" (click)="simpanData()">{{isEdit === true ? 'Update' : 'Add'}}</button>
+    </table>
+</form>
